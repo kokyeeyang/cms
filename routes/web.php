@@ -45,4 +45,27 @@ Route::get('/post/{id}/{name}', 'PostsController@showPost');
 
 // });
 
+Route::get('/insert', function(){
+	DB::insert('insert into posts(title, content) values(?, ?)', ['PHP with Laravel', 'Framework']);
+});
+
+Route::get('/read', function(){
+	$results = DB::select('SELECT * FROM posts WHERE id = ?', [1]);
+
+	foreach($results as $result){
+		var_dump($result->title);
+	}
+});
+
+Route::get('/update', function(){
+	$updated = DB::update('UPDATE posts SET title = "Bananas", content = "yellow" WHERE id=?', [1]);
+	return ('record updated');
+});
+
+Route::get('/delete', function(){
+	$deleted = DB::delete('DELETE FROM posts WHERE id=?', [1]);
+
+	return $deleted;
+});
+
 
