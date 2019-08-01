@@ -21,29 +21,16 @@ Route::get('/', function () {
 
 Route::get('/contact', 'PostsController@contact');
 
+Route::get('/read', function(){
+	$posts = Post::all();
+
+	foreach($posts as $post){
+		return $post->title;
+	}
+
+});
+
 Route::get('/post/{id}/{name}', 'PostsController@showPost');
-
-// Route::get('/about', function () {
-//     return "this is a short intro";
-// });
-
-// Route::get('/contact', function () {
-//     return "contact us yo!";
-// });
-
-// Route::get('/post/{id}/{name}', function ($id, $name) {
-//     return "this is post " . $id . " " . $name;
-// });
-
-// Route::get('/admin/posts/example', array('as' => 'admin.home', function () {
-
-// 	$url = route('admin.home');
-//     return "this url is " . $url;
-// }));
-
-// Route::group(['middleware' => ['web']], function () {
-
-// });
 
 Route::get('/insert', function(){
 	DB::insert('insert into posts(title, content) values(?, ?)', ['PHP with Laravel', 'Framework']);
